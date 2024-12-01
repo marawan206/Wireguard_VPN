@@ -92,8 +92,16 @@ sudo wg-quick down wg0
 # sudo systemctl stop wg-quick@wg0
 ```
 
-
 ## For automating Client creation in this VPN
 - Run ./VPN_Client_Gen.sh
 - send the created Client_config.sh to the client
 - Run the Client_config.sh on the client after giving permissions and run in root mode
+
+## Testing 
+- Use this Vagrantfile to create 2 VMs for simulating the process
+```bash
+vagrant init
+vagrant up
+vagrant ssh main 
+vagrant ssh client
+```
