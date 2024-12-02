@@ -97,8 +97,28 @@ sudo wg-quick down wg0
 - send the created Client_config.sh to the client
 - Run the Client_config.sh on the client after giving permissions and run in root mode
 
+## For easy to use vpn
+- We will add bash script to make it easier to use this vpn.
+
+``` bash 
+# write the content of the myvpn into the file 
+sudo nano /usr/local/bin/myvpn
+# or use this
+sudo cp myvpn /usr/local/bin/myvpn
+# Make the file Executable
+sudo chmod +x /usr/local/bin/myvpn
+```
+- You can use this script like this:
+``` bash 
+myvpn start
+myvpn status
+myvpn stop
+myvpn restart
+```
+
+
 ## Testing 
-- Use this Vagrantfile to create 2 VMs for simulating the process
+- Use this Vagrantfile to create 2 VMs for simulating the process on your Host machine
 ```bash
 vagrant init
 vagrant up
