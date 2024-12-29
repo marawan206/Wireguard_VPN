@@ -1,4 +1,16 @@
 #!/bin/bash
+
+function show_help() {
+  echo "Usage: myvpn {start|stop|restart|status|help}"
+  echo
+  echo "Commands:"
+  echo "  start      Start the WireGuard VPN."
+  echo "  stop       Stop the WireGuard VPN."
+  echo "  restart    Restart the WireGuard VPN."
+  echo "  status     Show the status of the WireGuard VPN."
+  echo "  help       Display this help message."
+}
+
 case "$1" in
   start)
     echo "Starting WireGuard VPN..."
@@ -17,8 +29,12 @@ case "$1" in
     echo "WireGuard VPN Status:"
     sudo wg
     ;;
+  help|--help|-h)
+    show_help
+    ;;
   *)
-    echo "Usage: karyvpn {start|stop|restart|status}"
+    echo "Invalid option: $1"
+    echo "Use 'myvpn help' for a list of available commands."
     exit 1
     ;;
 esac
