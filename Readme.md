@@ -1,5 +1,5 @@
 
-# STEPS
+# WireGuard VPN
 - Installing WireGuard, resolvconf
 - Genrate Public & Private Key pairs
 - Configuring the WireGuard
@@ -125,3 +125,51 @@ vagrant up
 vagrant ssh main 
 vagrant ssh client
 ```
+
+# MQTTS Server with TLS/SSL
+
+## Steps
+1. Install MQTT server and client.
+2. Create CA certificate and private key.
+3. Create broker and clients' private keys and certificates signed by the CA.
+4. Configure the broker to bind with the VPN IP on port 8883.
+5. Enable username and password authentication for added security.
+6. Test the setup.
+
+---
+
+## Server Installation
+```bash
+sudo apt install mosquitto mosquitto-clients
+
+sudo cp mosquitto.conf /etc/mosquitto/mosquitto.conf
+
+sudo mosquitto_passwd -c /etc/mosquitto/passwords username
+
+sudo systemctl restart mosquitto
+
+```
+
+## Creating CA Certificates
+
+Follow this guide: [Creating CA Certificates](https://openest.io/services/mqtts-how-to-use-mqtt-with-tls/ )
+
+```bash
+sudo cp certs/* /etc/mosquitto/certs/
+sudo chown -R mosquitto:mosquitto /etc/mosquitto/certs/
+```
+
+## Test from Another Machine
+``` bash
+mosquitto_pub -p 8883 --cafile ca.crt --cert client.crt --key client.key -h 10.0.0.1 -u username -P password -t hello/world -m "Hello From Client inside VPN"
+mosquitto_sub -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h 10.0.0.1 -u username -P password -t hello/world
+
+```
+
+# Monitoring
+
+Follow this guide: [Prometheus](https://medium.com/@abdullah.eid.2604/prometheus-installation-on-linux-ubuntu-c4497e5154f6)
+Follow this guide: [Grafana](https://grafana.com/docs/grafana/latest/installation/)
+Follow this guide: [Node_exporter](https://medium.com/@abdullah.eid.2604/node-exporter-installation-on-linux-ubuntu-8203d033f69c)
+Follow this guide: [Wiregurad_exporter](https://github.com/mdlayher/wireguard_exporter.git)
+

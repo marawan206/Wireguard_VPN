@@ -1,10 +1,6 @@
 #! /bin/bash
 set -e
 
-# 192.168.1.100
-# t72mfG/RrlqGpH/4iVydJ0Aep2EkA5NuoJdw0uljfHw=
-# 10.0.0.x/32
-
 echo "Please enter your Server Public IP: "
 read Server_Access_IP
 
@@ -14,7 +10,10 @@ read Server_publickey
 echo "Please enter your Client IP address for VPN: "
 read C_IP
 
-Clientid=$((RANDOM % 1000000))
+echo "Please enter your Client ID: "
+read Clientid 
+
+# Clientid=$((RANDOM % 1000000))
 
 wg genkey > "${Clientid}_privatekey"
 cat "${Clientid}_privatekey" | wg pubkey > "${Clientid}_publickey"
