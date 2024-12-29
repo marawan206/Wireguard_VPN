@@ -1,6 +1,6 @@
 # Project 
 
-This project creates a secure and scalable communication system using WireGuard VPN, a Django backend, and MQTT for IoT communication. WireGuard secures the network, with the Django server and Mosquitto MQTT broker bound to it. Encrypted communication is ensured through certificates signed by a custom CA. Nginx acts as a reverse proxy, allowing only VPN-connected clients. Monitoring is handled with Prometheus and Grafana, while a Bash script simplifies VPN client management. This setup ensures reliable and secure communication for IoT devices and mobile applications.
+This project creates a secure and scalable communication system using WireGuard VPN, a Django backend, and MQTT for IoT communication. WireGuard secures the network, with the Django server and Mosquitto MQTT broker bound to it. Encrypted communication is ensured through certificates signed by a custom CA. Nginx acts as a reverse proxy, allowing only VPN-connected clients. Monitoring is handled with Prometheus and Grafana, while a Bash script simplifies VPN client management. This setup ensures reliable and secure communication for IoT devices and Web/mobile applications.
 ## Table of Contents
 
 1. [Setup Work Environment](#setup-work-environment)
@@ -181,6 +181,7 @@ sudo cp certs/* /etc/mosquitto/certs/
 sudo chown -R mosquitto:mosquitto /etc/mosquitto/certs/
 ```
 ![MQTTS](Figures/mqtts.png)
+![MQTTS](Figures/mqttswork.png)
 
 
 ### Test from Another Machine
@@ -201,12 +202,5 @@ mosquitto_sub -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -
 ![vm](Figures/grafanavm.png)
 ![vpn](Figures/grafanavpn.png)
 ---
-
-
-##  Figures
-![desktop](Figures/desktop.png)
-
-![Mobile](Figures/mobile.png)
-
 
 
